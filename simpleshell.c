@@ -1,48 +1,48 @@
 #include "main.h"
 /**
 * main - simple shell
-* Return: 0 if success
+* @argc: integer
+* @argv: array
+* Return: EXITSTATUS
 */
-int main(void)
+int main(int argc __attribute__((unused)), char **argv)
 {
-ssize_t bytes_rd = 0;
-size_t bf_size = 0;
-char *entry = NULL, *arguments[20];
-int count = 1, vf_stat = 0, exist_stat = 0, exit_stat = 0, blt_stat = 0;
-
-_printp("$ ", 2);
-bytes_rd = getline(&entry, &bf_size, stdin);
-while (bytes_rd != -1)
+char *line = NULL;
+size_t length = 0;
+char *tokens[buffer];
+int cnt, result;
+char *fullpath;
+int EXITSTATUS = 0;
+while (1)
 {
-if (*entry != '\n')
+result = handle_prompt(&length, &line);
+if (result == 1)
+break;
+cnt = 0;
+tokens[cnt] = strtok(line, " \t\n");
+while (tokens[cnt] != NULL)
 {
-fill_args(entry, arguments);
-if (arguments[0] != NULL)
-{
-exist_stat = exist(arguments[0]);
-if (exist_stat != 0)
-{
-vf_stat = verify_path(arguments);
-if (vf_stat == 0)
-exit_stat = exec(arguments), free(entry), free(*arguments);
-else
-{
-blt_stat = verify_blt(arguments, exit_stat);
-if (blt_stat != 0)
-exit_stat = print_not_found(arguments, count), free(entry);
+cnt++;
+tokens[cnt] = strtok(NULL, " \t\n");
 }
+tokens[cnt] = NULL;
+fullpath = tokens[0];
+result = check_builtins(cnt, tokens, &EXITSTATUS, argv);
+if (result == 1)
+break;
+else if (result == 2)
+continue;
+result = _ch(argv, tokens, &fullpath, &EXITSTATUS);
+if (result == 1)
+break;
+else if (result == 2)
+continue;
+result = exec_command(&EXITSTATUS, fullpath, tokens);
+if (result == 1)
+break;
+else if (result == 2)
+continue;
 }
-else
-exit_stat = exec(arguments), free(entry);
-}
-else
-free(entry);
-}
-else if (*entry == '\n')
-free(entry);
-entry = NULL, count++;
-_printp("$ ", 2), bytes_rd = getline(&entry, &bf_size, stdin);
-}
-last_free(entry);
-return (exit_stat);
+free(line);
+return (EXITSTATUS);
 }

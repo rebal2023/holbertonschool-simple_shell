@@ -1,5 +1,6 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,27 +8,27 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <fcntl.h>
-#include <limits.h>
-#include <time.h>
+#include <stddef.h>
 
 extern char **environ;
 
-int _strcmp(char *str1, char *str2);
-int verify_path(char **arguments);
+int check_path(char *path);
+char *_which(char *filename, char *path);
+int _strlen(char *str);
+char *_strcpy(char *dest, char *src);
+char *_strcat(char *dest, char *src);
 char *_strdup(char *str);
-char *append_command(char *dir_path, char *command);
-int exec(char **arguments);
-int fill_args(char *entry, char **arguments);
-int print_numbers(int n);
-int _strlen(const char *string);
-int print_not_found(char **arguments, int count);
-char *_getenv(char *global_var);
-int _printp(const char *prompt, unsigned int size);
-int _putchar(char c);
-int exist(char *pathname);
-void free_grid(char **grid, int heigth);
-void last_free(char *entry);
-int verify_blt(char **arguments, int exit_stat);
+int _strcmp(char *str1, char *str2);
+int exec_command(int *exit_status, char *fullpath, char *tokens[]);
+int handle_prompt(size_t *length, char **line);
+int check_builtins(int cnt, char **tokens, int *exit_status, char **argv);
+int _ch(char **argv, char **tokens, char **fullpath, int *exit_status);
+char *_getenv(char *name);
+int _strncmp(char *str1, char *str2, int n);
+int _unsetenv(char *name);
+void *_realloc(void *ptr, size_t size);
+ssize_t _getline(char **linePtr, size_t *buff_size, FILE *my_file);
+int _atoi(char *str);
+void error_message(char **tokens, char **argv, int *exit_status);
 
 #endif
