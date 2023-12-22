@@ -29,7 +29,7 @@ else
 {
 blt_stat = verify_blt(arguments, exit_stat);
 if (blt_stat != 0)
-exit_stat = print_not_found(arguments, counter), free(entry);
+exit_stat = print_not_found(arguments, count), free(entry);
 }
 }
 else
