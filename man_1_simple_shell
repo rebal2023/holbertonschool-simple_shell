@@ -3,7 +3,7 @@
 .SH NAME
 
 .B simple_shell
-- simple_shell is a basic shell program created in C.
+simple_shell is a basic shell program created in C.
 
 .SH SYNOPSIS
 
@@ -11,7 +11,7 @@ hsh[options][file]
 
 .SH DESCRIPTION
 
-simple_shell is a simple UNIX command interpreter.It can do some things that bash can do but it is not as powerful or complex as bash.
+simple_shell is a basic command interpreter designed to execute commands on a UNIX-like operating system. It offers a simplified interface for interacting with the system, providing essential features for task automation and file management.
 
 .B OVERVIEW
 Similar to other command line interfaces, simple_shell reads lines from either a file or the terminal, interprets them, and generally executes other commands.
