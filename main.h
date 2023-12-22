@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <stddef.h>
+#define buffer 1024
 
 extern char **environ;
 
