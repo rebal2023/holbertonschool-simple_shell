@@ -1,4 +1,4 @@
-.TH man 1 "20 Dec 2023" "0.1" "simple_shell manual page"
+.TH man 1 "2023-12-20" "0.1" "simple_shell manual page"
 
 .SH NAME
 
@@ -14,33 +14,28 @@ hsh[options][file]
 simple_shell is a simple UNIX command interpreter.It can do some things that bash can do but it is not as powerful or complex as bash.
 
 .B OVERVIEW
-Similar to other command line interfaces, simple_shell reads lines from either a file or the terminal, interprets them, and generally executes othe\
-r commands.
+Similar to other command line interfaces, simple_shell reads lines from either a file or the terminal, interprets them, and generally executes other commands.
 
-.SH OPTIONS
+.SH BUILDING
 
-The following options are supported by simple_shell:
-
-gcc is used for compiling simple_shell with some extra flags.
+To compile simple_shell, use the following command:
 .P
 .RS
 .B $ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 .P
 .RE
 
-.P
-.RS
+.SH OPTIONS
+
+The following options are supported by simple_shell:
+
+.TP
 .B -c
 Execute the commands from a string operand instead of reading from the standard input or a file.
-.P
-.RE
 
-.P
-.RS
+.TP
 .B -h
 Display a help message and exit.
-.P
-.RE
 
 .SH EXIT STATUS
 
